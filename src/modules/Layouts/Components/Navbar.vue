@@ -6,12 +6,18 @@ import { logout } from '../../../services';
 const token = ref('');
 const router = useRouter();
 
-function handleLogout() {
-  logout()
+function handleClick() {
+  if(!token.value) {
+    router.push('/login');
+  } else {
+    logout()
     .then((re) => {
-      router.push('/');
+      window.location.reload()
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     })
     .catch((err) => console.log(err));
+  }
 }
 
 onMounted(() => {
@@ -32,7 +38,7 @@ onMounted(() => {
         <span class="self-center text-2xl font-semibold whitespace-nowrap">Rental Mobil</span>
       </a>
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <button @click="handleLogout" :class="`text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center ${token ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'}`">
+        <button @click="handleClick" :class="`text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center ${token ? 'bg-red-700 hover:bg-red-800' : 'bg-blue-700 hover:bg-blue-800'}`">
           {{ token ? 'Logout' : 'Login' }}
         </button>
         <button

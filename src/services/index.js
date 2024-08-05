@@ -11,8 +11,8 @@ export const login = (payload) => {
     return axios.post(`${VITE_BASE_URL}/login`, payload)
 }
 
-export const logout = (payload) => {
-    return axios.post(`${VITE_BASE_URL}/logout`, payload)
+export const logout = () => {
+    return axiosInstance.post(`${VITE_BASE_URL}/logout`)
 }
 
 export const createCar = (payload) => {

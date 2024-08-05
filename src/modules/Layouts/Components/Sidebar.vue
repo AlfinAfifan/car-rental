@@ -6,7 +6,9 @@ const router = useRouter();
 function handleLogout() {
   logout()
     .then((res) => {
-      router.push("/")
+      router.push("/login")
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     })
     .catch((err) => console.log(err));
 }
